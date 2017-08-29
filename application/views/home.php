@@ -36,71 +36,15 @@
         <div class="header-content">
             <div class="header-content-inner">
                 <div class="intro">
-                    <h1 id="homeHeading">Lorem ipsum Ut tempor incididunt eu exercitation est.</h1>
+                    <h1 id="homeHeading">FACTORY EMISSION MONITORING SYSTEM</h1>
                     <hr>
-                    <p>Lorem ipsum Ut laboris in reprehenderit consequat enim ut velit dolore ea ad.</p>
+                    <p>Managing and monitoring system for environment managers and enterprises </p>
                     <a href="#about" class="btn btn-primary btn-xl page-scroll">Get started</a>
                 </div>
-                <div class="col-md-offset-4 col-md-4 admin">
-                    <div class="panel panel-default">
-                        <div class="panel-heading left-text">
-                            <h4><strong>Admin login</strong></h3>
-                        </div>
-                        <div class="panel-body">
-                            <?php echo validation_errors(); ?>
-                            <?php echo form_open('Home/login_admin'); ?>
-                                <div class="form-group form-label">
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Enter username">
-                                </div>
-                                <div class="form-group form-label">
-                                    <label for="exampleInputPassword1">Password <a href="#">(forgot password)</a></label>
-                                    <input type="password" name="password" class="form-control" placeholder="Enter Password">
-                                </div>
-                            <button type="submit" class="btn btn-primary btn-default">Login</button>
-                            <?php echo form_close();?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-offset-4 col-md-4 enterprise">
-                    <div class="panel panel-default">
-                        <div class="panel-heading left-text">
-                            <h4><strong>Enterprise login</strong></h3>
-                        </div>
-                        <div class="panel-body">
-                            <?php echo validation_errors(); ?>
-                            <?php echo form_open('Home/login_enterprise'); ?>
-                                <div class="form-group form-label">
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Enter username">
-                                </div>
-                                <div class="form-group form-label">
-                                    <label for="exampleInputPassword1">Password <a href="#">(forgot password)</a></label>
-                                    <input type="password" name="password" class="form-control" placeholder="Enter Password">
-                                </div>
-                            <button type="submit" class="btn btn-primary btn-default">Login</button>
-                            <?php echo form_close();?>
-                        </div>
-                    </div>
-                </div>
+                
+                
+
             </div>
         </div>
     </header>
-    <script>
-    $(document).ready(function () {
-        $("#enterprise-link").click(function () {
-            $(".enterprise").css("display","block");
-            $(".admin").css("display","none");
-            $(".intro").css("display","none");
-        });
-    });
-    </script>
-    <script>
-    $(document).ready(function () {
-        $("#admin-link").click(function () {
-            $(".admin").css("display","block");
-            $(".enterprise").css("display","none");
-            $(".intro").css("display","none");
-        });
-    });
-    </script>
+    

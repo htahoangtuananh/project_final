@@ -1,4 +1,8 @@
 /********************** COMMON **********************/
+.succed{
+  color:green;
+  font-weight: bold;
+}
 
 .admin{
   display: none;

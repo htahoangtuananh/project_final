@@ -1,9 +1,9 @@
-			<div class="col-md-9">
+<div class="col-md-9">
 				<div class="row">
 	  				<div class="col-md-6">
 	  					<div class="content-box-large">
 			  				<div class="panel-heading">
-					            <div class="panel-title para-title">Thêm sửa ngành sản xuất</div>
+					            <div class="panel-title para-title">Thêm sửa chất ô nhiễm</div>
 					        </div>
 			  				<div class="panel-body form-horizontal">
 							<?php echo validation_errors(); ?>

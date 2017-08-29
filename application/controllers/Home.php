@@ -14,11 +14,15 @@ class Home extends CI_Controller {
 	{
 		if($this->session->logged_in==TRUE){
 		$data['name']=$this->session->username;
+		$sector['location']=$this->model->get_location();
+		$sector['sector']=$this->model->get_sector();
 		$this->load->view('header',$data);
-		$this->load->view('home');
+		$this->load->view('home',$sector);
 		}else
+		$sector['location']=$this->model->get_location();
+		$sector['sector']=$this->model->get_sector();
 		$this->load->view('header');
-		$this->load->view('home');
+		$this->load->view('home',$sector);
 	}
 
 	public function login_admin()
@@ -31,6 +35,8 @@ class Home extends CI_Controller {
 		}
 		else
 		$post  = $this->input->post();
+		$post=array_map("htmlspecialchars", $post);
+		$post=array_map("stripslashes", $post);
 		if ( ! is_array($post) || empty($post))
 		{
 		  redirect('Home');
@@ -76,11 +82,11 @@ class Home extends CI_Controller {
 		if($this->session->elogged_in==TRUE){
 				$data['name']=$this->session->eusername;
 				redirect('Enterprise');
-			
 		}
 		else{
 		$post  = $this->input->post();
-		
+		$post=array_map("htmlspecialchars", $post);
+		$post=array_map("stripslashes", $post);
 		if ( ! is_array($post) || empty($post))
 		{
 		  redirect('Home');
@@ -121,4 +127,75 @@ class Home extends CI_Controller {
 		}		
 	}
 }
+
+	public function factoryregister()
+	{
+		if(!isset($this->session->elogged_in))
+		{
+				$post=$this->input->post();
+				$post=array_map("htmlspecialchars", $post);
+				$post=array_map("stripslashes", $post);
+				if ( ! is_array($post) || empty($post))
+				{
+				redirect('Home');
+				}
+				
+				$config = array(
+					array(
+					  'field' => 'factoryname',
+					  'label' => 'factoryname',
+					  'rules' => 'trim|required',
+					  'errors' => array(
+						'required' => 'Admin không được phép để trống'
+					)
+					),
+					array(
+					  'field' => 'sector',
+					  'label' => 'sector',
+					  'rules' => 'trim|required'
+					),
+					array(
+					  'field' => 'address',
+					  'label' => 'address',
+					  'rules' => 'trim|required'
+					),
+					array(
+					  'field' => 'email',
+					  'label' => 'email',
+					  'rules' => 'trim|required'
+					),
+					array(
+					  'field' => 'capacity',
+					  'label' => 'capacity',
+					  'rules' => 'trim|required'
+					),
+					array(
+					  'field' => 'other',
+					  'label' => 'other',
+					  'rules' => 'trim|required'
+					)
+					);
+				$this->form_validation->set_rules($config);
+				if ($this->form_validation->run() == FALSE)
+				{
+					$this->session->set_flashdata("message","Invalid input or blank field !");
+					redirect('Home');
+				}else
+				{
+					$capacity=$post['capacity'];
+					$factoryname=$post['factoryname'];
+					$sector=$post['sector'];
+					$address=$post['address'];
+					$other=$post['other'];
+					$email=$post['email'];
+					$this->model->addfactoryregistration($factoryname,$sector,$address,$other,$email,$capacity);
+					$this->session->set_flashdata("message","Succeed !");
+					redirect('Home');
+				}
+			}
+			else
+			{
+				redirect('Enterprise');
+			}
+	}
 }

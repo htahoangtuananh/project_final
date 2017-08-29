@@ -96,7 +96,7 @@
 									    <?php endforeach;?>
 										<div class="form-group">
 											<div class="col-md-offset-3 col-md-9">
-											  <button type="submit" class="btn btn-primary">Cập nhật</button>
+											  <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw" aria-hidden="true"></i> Duyệt</button>
 											</div>
 								 		</div>
 									<?php echo form_close();?>

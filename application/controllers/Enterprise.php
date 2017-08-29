@@ -15,33 +15,63 @@ class Enterprise extends CI_Controller {
  }
 	public function index()
 	{
-		
-		$data['name']=$this->session->eusername;
-		$message['message']=$this->session->flashdata('message');
-		$this->load->view('Enterprise/header_CP',$data);
-		$this->load->view('Enterprise/CP',$message);
+		if(isset($this->session->elogged_in))
+		{
+			$factory_id=$this->session->factory_id;
+			$data['name']=$this->session->eusername;
+			$sector['factory']=$this->model->get_factory();
+			$message['message']=$this->session->flashdata('message');
+			$this->load->view('Enterprise/header_CP',$data);
+			$this->load->view('Enterprise/CP',$sector);
+		}
+		else
+		{
+			redirect('Home');
+		}
+	}
 
+	public function requestchange()
+	{
+		if(isset($this->session->elogged_in))
+		{
+			$factory_id=$this->session->factory_id;
+			$data['name']=$this->session->eusername;
+			$sector['factory']=$this->model->get_factory();
+			$message['message']=$this->session->flashdata('message');
+			$this->load->view('Enterprise/header_CP',$data);
+			$this->load->view('Enterprise/CP_changerequest',$sector);
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function pick()
 	{
-		
-		$this->session->unset_userdata('sourceid');
-		$factory_id=$this->session->factory_id;
-		$source['source']=$this->model->get_selected_source($factory_id);
-		$data['name']=$this->session->eusername;
-		$this->load->view('Enterprise/header_CP',$data);
-		$this->load->view('Enterprise/CP_pick',$source);
-
+		if(isset($this->session->elogged_in))
+		{
+			$this->session->unset_userdata('sourceid');
+			$factory_id=$this->session->factory_id;
+			$source['source']=$this->model->get_selected_source($factory_id);
+			$data['name']=$this->session->eusername;
+			$this->load->view('Enterprise/header_CP',$data);
+			$this->load->view('Enterprise/CP_pick',$source);
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function picksubmit()
 	{
 		
-		if(isset($this->session->logged_in))
+		if(isset($this->session->elogged_in))
 		{
 				$post=$this->input->post();
-
+				$post=array_map("htmlspecialchars", $post);
+				$post=array_map("stripslashes", $post); 
 				if ( ! is_array($post) || empty($post))
 				{
 				redirect('Enterprise/pick');
@@ -78,6 +108,8 @@ class Enterprise extends CI_Controller {
 
 	public function month()
 	{
+		if(isset($this->session->elogged_in))
+		{
         date_default_timezone_set("Asia/Ho_Chi_Minh");
 		$this->session->unset_userdata('month');
 		$sourceid=$this->session->sourceid;
@@ -97,7 +129,11 @@ class Enterprise extends CI_Controller {
 		$data['name']=$this->session->eusername;
 		$this->load->view('Enterprise/header_CP',$data);
 		$this->load->view('Enterprise/CP_month',$source);
-
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function monthsubmit()
@@ -106,7 +142,9 @@ class Enterprise extends CI_Controller {
 		if(isset($this->session->elogged_in))
 		{
 				$post=$this->input->post();
-
+				$post=array_map("htmlspecialchars", $post);
+				$post=array_map("stripslashes", $post); 
+  				
 				if ( ! is_array($post) || empty($post))
 				{
 				redirect('Enterprise/month');
@@ -141,9 +179,16 @@ class Enterprise extends CI_Controller {
 
 	public function upload_cems()
 	{
+		if(isset($this->session->elogged_in))
+		{
 		$data['name']=$this->session->eusername;
 		$this->load->view('Enterprise/header_CP',$data);
 		$this->load->view('Enterprise/CP_uploadcems');
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function sample(){
@@ -261,6 +306,8 @@ class Enterprise extends CI_Controller {
 
 	public function detailcems($month)
 	{
+		if(isset($this->session->elogged_in))
+		{
 		$sourceid=$this->session->sourceid;
 		$data['name']=$this->session->eusername;
 		$total["source"]=$this->model->get_source_selected($sourceid);
@@ -268,11 +315,17 @@ class Enterprise extends CI_Controller {
 		$total["month"]=$month;
 		$this->load->view('Enterprise/header_CP',$data);
 		$this->load->view('Enterprise/CP_detailcems',$total);
-
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function registersource()
 	{
+		if(isset($this->session->elogged_in))
+		{
 		$factory_id=$this->session->factory_id;
 		$registersource["produce"] = $this->model->get_produce_for_register($factory_id);
 		$registersource["method"] = $this->model->get_method();
@@ -280,7 +333,11 @@ class Enterprise extends CI_Controller {
 		$message['message']=$this->session->flashdata('message');
 		$this->load->view('Enterprise/header_CP',$data);
 		$this->load->view('Enterprise/CP_registersource',$registersource);
-
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 
 	public function registersourcesubmit()
@@ -289,7 +346,9 @@ class Enterprise extends CI_Controller {
 		if(isset($this->session->elogged_in))
 		{
 				$post=$this->input->post();
-
+				$post=array_map("htmlspecialchars", $post);
+				$post=array_map("stripslashes", $post); 
+  				
 				if ( ! is_array($post) || empty($post))
 				{
 				redirect('Enterprise/pick');
@@ -345,12 +404,18 @@ class Enterprise extends CI_Controller {
 
 	public function listsource()
 	{
+		if(isset($this->session->elogged_in))
+		{
 		$factory_id=$this->session->factory_id;
 		$listsource['list']=$this->model->get_list_source($factory_id);
 		$data['name']=$this->session->eusername;
 		$message['message']=$this->session->flashdata('message');
 		$this->load->view('Enterprise/header_CP',$data);
 		$this->load->view('Enterprise/CP_listsource',$listsource);
-
+		}
+		else
+		{
+			redirect('Home');
+		}
 	}
 }

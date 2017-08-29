@@ -1,10 +1,11 @@
+
 			<div class="col-md-9">
 				<div class="row">
 	  				<div class="col-md-12">
 	  					<div class="row">
 		  					<div class="content-box-large">
 				  				<div class="panel-heading">
-						            <div class="panel-title para-title">Thêm ngành sản xuất</div>
+						            <div class="panel-title para-title">Thêm nguồn thải mới</div>
 						        </div>
 				  				<div class="panel-body form-horizontal">
 								<?php echo validation_errors(); ?>
@@ -37,7 +38,7 @@
 											<div class="col-md-9">
 												<select id="choose" class="form-control selectpicker" multiple>
 											    <?php for($k=0;$k<count($method);++$k): ?>
-												<option type="<?php echo $method[$k]['method_id']?>"><?php echo $method[$k]['method_name']?>s</option>
+												<option type="<?php echo $method[$k]['method_id']?>"><?php echo $method[$k]['method_name']?></option>
 												<?php endfor;?>
 											  </select>
 											</div>

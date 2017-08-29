@@ -73,7 +73,7 @@
 	                </h5>
 	                <ul class="nav nav-pills nav-stacked">
 	                <li><a href="<?php echo base_url().'index.php/Admin/brand'?>">Thêm, sửa ngành sản xuất</a></li>
-	                <li><a href="<?php echo base_url().'index.php/Admin/hspt'?>">Hệ số phát thải theo ngành</a></li>    
+	                <li><a href="<?php echo base_url().'index.php/Admin/efactor'?>">Hệ số phát thải theo ngành</a></li>    
 	           		<li><a href="<?php echo base_url().'index.php/Admin/technic'?>">Mã công nghệ xử lý</a></li>
 	           		<li><a href="<?php echo base_url().'index.php/Admin/producetech'?>">Mã công nghệ sản xuất</a></li>
 	                <li><a href="<?php echo base_url().'index.php/Admin/pollution'?>">Mã chất ô nhiễm</a></li>
@@ -82,7 +82,10 @@
 	                    <strong> Quản lý nhà máy</strong>
 	                </h5>
 	                <ul class="nav nav-pills nav-stacked">
-	                    <li><a href="<?php echo base_url().'index.php/Admin/factory'?>">Thêm sửa nhà máy</a></li>
+	                    <li><a href="<?php echo base_url().'index.php/Admin/addfactory'?>">Thêm sửa nhà máy</a></li>
+	                     <li><a href="<?php echo base_url().'index.php/Admin/listregistration'?>">Danh sách đăng ký<?php if($unread>0):?>
+						<div class="numberCircle"><?php echo $unread?></div>
+	                    <?php endif;?></a></li>
 	                    <li><a href="<?php echo base_url().'index.php/Admin/factorywsource'?>">Thêm sửa nguồn thải<?php if($unregister>0):?>
 						<div class="numberCircle"><?php echo $unregister?></div>
 	                    <?php endif;?></a>
